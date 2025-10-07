@@ -18,7 +18,7 @@ plugins:
 - {name: static_layer, type: "costmap_2d::StaticLayer"}
 - {name: obstacles_layer, type: "costmap_2d::ObstacleLayer"}
 - {name: inflater_layer, type: "costmap_2d::InflationLayer"}
-# - {name: social_layer, type: "social_navigation_layers::ProxemicLayer"}
+- {name: social_layer, type: "social_navigation_layers::ProxemicLayer"}
 
 social_layer:
   enabled: True

@@ -1,6 +1,17 @@
-image: short_map.jpg
+# old setup for outdoor map
+
+# image: outdoor_image.png
+# resolution: 0.1
+# origin: [-29, -44, 0]
+# occupied_thresh: 0.5
+# free_thresh: 0.5
+# negate: 0
+#?
+
+# new setup for sidewalk map
+image: sidewalk_image.png
 resolution: 0.1
-origin: [-29, -44, 0]
+origin: [-31,-25,0]
 occupied_thresh: 0.5
 free_thresh: 0.5
 negate: 0
