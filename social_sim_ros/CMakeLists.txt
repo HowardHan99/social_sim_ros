@@ -24,6 +24,8 @@ add_message_files(
   FILES
     Agent.msg
     AgentArray.msg
+    Obstacle.msg
+    ObstacleArray.msg
     PersonEntry.msg
     PersonEntryArray.msg
     TrialInfo.msg
