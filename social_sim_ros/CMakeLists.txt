@@ -56,3 +56,6 @@ target_link_libraries(differential_drive_sim_controller ${catkin_LIBRARIES})
 
 add_executable(pose_to_people src/pose_to_people.cpp)
 target_link_libraries(pose_to_people ${catkin_LIBRARIES})
+
+add_executable(obstacle_to_pointcloud src/obstacle_to_pointcloud.cpp)
+target_link_libraries(obstacle_to_pointcloud ${catkin_LIBRARIES})

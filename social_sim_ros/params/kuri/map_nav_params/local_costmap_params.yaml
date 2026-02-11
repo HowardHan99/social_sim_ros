@@ -1,4 +1,5 @@
 local_costmap:
+# local_costmapthis is the most important costmap for navigation:
    global_frame: map
    robot_base_frame: base_link
    update_frequency: 20.0
@@ -10,9 +11,17 @@ local_costmap:
    cost_scaling_factor: 3.0
 
    obstacles_layer:
-      enabled: false
-      observation_sources: scan
+      enabled: true
+      observation_sources: obstacle_cloud scan
       static_map: /map
+      obstacle_cloud:
+         sensor_frame: map
+         data_type: PointCloud2
+         topic: /obstacle_cloud
+         marking: true
+         clearing: false
+         min_obstacle_height: 0.0
+         max_obstacle_height: 2.0
       scan:
          sensor_frame: laser
          data_type: LaserScan

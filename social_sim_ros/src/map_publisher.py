@@ -30,7 +30,7 @@ ENV_TO_MAP = {
         'university' : 'university',
         'eth' : 'ETH',
         'zara' : 'zara',
-        'sidewalk' : 'outdoor',
+        'sidewalk' : 'sidewalk',
 }
 
 def signal_process_and_children(pid, signal_to_send, wait=False):

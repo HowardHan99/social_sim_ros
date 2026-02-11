@@ -18,5 +18,7 @@
   </node>
 
   <node pkg="social_sim_ros" type="pose_to_people" name="pose_to_people" output="screen"/>
+  <node pkg="social_sim_ros" type="obstacle_to_pointcloud" name="obstacle_to_pointcloud" output="screen"/>
+  <node pkg="social_sim_ros" type="obstacle_visualizer.py" name="obstacle_visualizer" output="screen"/>
 
 </launch>

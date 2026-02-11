@@ -20,6 +20,20 @@ plugins:
 - {name: inflater_layer, type: "costmap_2d::InflationLayer"}
 - {name: social_layer, type: "social_navigation_layers::ProxemicLayer"}
 
+obstacles_layer:
+  enabled: True
+  observation_sources: obstacle_cloud
+  obstacle_cloud:
+    sensor_frame: map
+    data_type: PointCloud2
+    topic: /obstacle_cloud
+    marking: true
+    clearing: false
+    min_obstacle_height: 0.0
+    max_obstacle_height: 2.0
+    obstacle_range: 100.0
+    raytrace_range: 100.0
+
 social_layer:
   enabled: True
   cutoff: 10.0
