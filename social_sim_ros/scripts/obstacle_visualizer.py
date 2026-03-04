@@ -3,6 +3,7 @@
 import rospy
 from social_sim_ros.msg import ObstacleArray
 from visualization_msgs.msg import Marker, MarkerArray
+from geometry_msgs.msg import Vector3
 from std_msgs.msg import ColorRGBA
 import random
 
@@ -35,7 +36,13 @@ def obstacle_callback(msg, marker_publisher):
     delete_all_marker.action = Marker.DELETEALL
     marker_array.markers.append(delete_all_marker)
 
+    obstacles_by_id = {}
     for obstacle in msg.obstacles:
+        if obstacle.id in obstacles_by_id:
+            rospy.logwarn_throttle(5.0, "Duplicate obstacle id %d received; visualizer keeps latest.", obstacle.id)
+        obstacles_by_id[obstacle.id] = obstacle
+
+    for obstacle in obstacles_by_id.values():
         marker = Marker()
         marker.header.frame_id = msg.header.frame_id
         marker.header.stamp = rospy.Time.now()
@@ -56,15 +63,23 @@ def obstacle_callback(msg, marker_publisher):
         # Add marker to be published
         marker.action = Marker.ADD
         
-        # Copy pose and scale directly from the obstacle message
+        # Copy pose and scale from the obstacle message.
+        # Enforce a minimum scale so obstacles with a zero dimension (e.g. flat
+        # objects with no height) are still visible in RViz instead of invisible.
         marker.pose = obstacle.pose
-        marker.scale = obstacle.scale
+        MIN_SCALE = 0.05
+        marker.scale = Vector3(
+            x=max(obstacle.scale.x, MIN_SCALE),
+            y=max(obstacle.scale.y, MIN_SCALE),
+            z=max(obstacle.scale.z, MIN_SCALE),
+        )
         
         # Assign a color based on the obstacle type for better visualization
         marker.color = get_color_for_type(obstacle.type)
         
-        # Markers will auto-delete if a new one isn't published after this duration
-        marker.lifetime = rospy.Duration(2.0) # Slightly longer than the publish interval
+        # Keep marker until explicitly replaced/deleted by next snapshot.
+        # This avoids flicker when Unity publishes at a low rate.
+        marker.lifetime = rospy.Duration(0.0)
         
         marker_array.markers.append(marker)
         

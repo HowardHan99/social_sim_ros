@@ -1,0 +1,11 @@
+<library path="lib/libobstacle_array_layer">
+  <class name="social_sim_ros::ObstacleArrayLayer"
+         type="social_sim_ros::ObstacleArrayLayer"
+         base_class_type="costmap_2d::Layer">
+    <description>
+      Costmap layer that subscribes to ObstacleArray messages and directly
+      marks obstacle footprints.  Fully replaces marks each cycle so moved
+      obstacles never leave ghosts.
+    </description>
+  </class>
+</library>

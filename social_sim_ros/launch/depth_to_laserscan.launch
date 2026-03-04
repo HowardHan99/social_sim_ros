@@ -1,5 +1,6 @@
 <launch>
 
+  <!-- Commented out to disable /scan publishing
   <node name="depth_synchronizer"
       pkg="social_sim_ros"
       type="depth_synchronizer.py"
@@ -13,5 +14,6 @@
     <remap from="image" to="/center_depth_sync/image_raw" />
     <param name="output_frame_id" value="center_depth_link" />
   </node>
+  -->
 
 </launch>

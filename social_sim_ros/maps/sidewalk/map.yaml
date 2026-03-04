@@ -1,6 +1,6 @@
-image: sidewalk_image.png
+image: sidewalk.png
 resolution: 0.1
-origin: [-31, -25, 0]
+origin: [-36, -30, 0]
 occupied_thresh: 0.5
 free_thresh: 0.5
 negate: 0

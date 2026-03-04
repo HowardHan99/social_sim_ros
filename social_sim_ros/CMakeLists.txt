@@ -10,9 +10,11 @@ find_package(catkin REQUIRED COMPONENTS
     controller_interface
     controller_manager
     control_msgs
+    costmap_2d
     nav_msgs
     realtime_tools
     tf
+    tf2
     urdf
     pluginlib
     message_generation
@@ -42,8 +44,9 @@ generate_messages(
 
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES ${PROJECT_NAME}
+  LIBRARIES obstacle_array_layer
   CATKIN_DEPENDS
+    costmap_2d
     message_runtime
     std_msgs
     geometry_msgs
@@ -57,5 +60,6 @@ target_link_libraries(differential_drive_sim_controller ${catkin_LIBRARIES})
 add_executable(pose_to_people src/pose_to_people.cpp)
 target_link_libraries(pose_to_people ${catkin_LIBRARIES})
 
-add_executable(obstacle_to_pointcloud src/obstacle_to_pointcloud.cpp)
-target_link_libraries(obstacle_to_pointcloud ${catkin_LIBRARIES})
+add_library(obstacle_array_layer src/obstacle_array_layer.cpp)
+add_dependencies(obstacle_array_layer ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(obstacle_array_layer ${catkin_LIBRARIES})
